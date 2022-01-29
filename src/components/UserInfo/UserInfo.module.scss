@@ -1,0 +1,21 @@
+@import "../../variables.scss";
+.userInfo {
+	display: flex;
+}
+
+.info {
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	.userName {
+		font-size: 18px;
+		line-height: 21px;
+		color: black;
+	}
+	.lastOnline {
+		font-size: 16px;
+		line-height: 19px;
+		color: $color-blue;
+	}
+}

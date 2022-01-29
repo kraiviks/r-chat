@@ -1,0 +1,42 @@
+@import "../../variables.scss";
+main {
+	display: flex;
+	padding: 110px 64px 0;
+}
+
+.chats {
+	padding: 5px 15px 5px 5px;
+	overflow-y: auto;
+}
+
+.messages-box {
+	background-color: $color-white;
+	width: 800px;
+	margin-left: 64px;
+	margin-bottom: 40px;
+
+	.user-info {
+		display: flex;
+		justify-content: space-between;
+		background-color: $color-milc;
+		padding: 28px 60px;
+		.user-info_btn {
+			display: flex;
+			button {
+				margin-right: 20px;
+				svg {
+					height: 24px;
+					width: 24px;
+				}
+			}
+		}
+	}
+	.messages {
+		height: 80%;
+		padding: 30px 60px;
+	}
+	.message-form {
+		height: 50px;
+		border: 1px solid red;
+	}
+}

@@ -34,6 +34,9 @@ export const Chat = () => {
 			</div>
 			<div className="messages">
 				<Message>dasdasdsd</Message>
+				<Message className='user-m'>dasdasdsd</Message>
+				<Message>dasdasdsd</Message>
+				<Message className="user-m">dasdasdsd</Message>
 
 			</div>
 			<div className="message-form"></div>

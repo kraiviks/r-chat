@@ -32,6 +32,9 @@ main {
 		}
 	}
 	.messages {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 		height: 80%;
 		padding: 30px 60px;
 	}
@@ -39,4 +42,22 @@ main {
 		height: 50px;
 		border: 1px solid red;
 	}
+}
+
+.user-m {
+	align-self: flex-end;
+	div:first-child {
+		order: 2;
+	}
+	div:nth-child(2) {
+		order: 1;
+	}
+}
+
+.user-m [data-user] {
+	border-radius: 10px 0 10px 10px !important;
+	box-shadow: 10px 10px 25px rgba(112, 124, 151, 0.05),
+		15px 15px 35px rgba(112, 124, 151, 0.05);
+	background: $color-white !important;
+	color: $color-gray;
 }

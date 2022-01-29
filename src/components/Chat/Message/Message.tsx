@@ -12,6 +12,6 @@ export const Message = ({ children, className, ...props }: MessageProps) => {
 		<Avatar size='small'>
 			<img src="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg" alt="" />
 		</Avatar>
-		<div className={styles.message}>{children}</div>
+		<div className={styles.message} data-user>{children}</div>
 	</div>;
 };

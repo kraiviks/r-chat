@@ -5,4 +5,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	rounded?: boolean;
 	circle?: boolean;
 	shadow?: boolean;
+	bg?: string;
 }

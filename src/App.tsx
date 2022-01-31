@@ -14,6 +14,7 @@ import { Calendar } from './components/Calendar/Calendar';
 import { Contact } from './components/Contact/Contact';
 import { Settings } from './components/Settings/Settings';
 import { Notifications } from './components/Notifications/Notifications';
+import { Home } from './components/Home/Home';
 
 function App() {
 	const [user, setUser] = useState<string>("Kraiviks");
@@ -61,7 +62,7 @@ function App() {
 
 			</aside>
 			<Routes>
-				<Route path="/" element={<div>Home</div>} />
+				<Route path="/" element={<Home />} />
 				<Route path="/chat" element={<Chat />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/notifications" element={<Notifications />} />

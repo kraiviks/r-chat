@@ -2,7 +2,7 @@ import styles from './Message.module.scss'
 import { MessageProps } from './Message.props';
 import cn from 'classnames';
 import { Avatar } from '../..';
-export const Message = ({ children, className, ...props }: MessageProps) => {
+export const Message = ({ children, className, user, ...props }: MessageProps) => {
 	return <div
 		className={cn(styles.messageItem, className, {
 
@@ -10,7 +10,7 @@ export const Message = ({ children, className, ...props }: MessageProps) => {
 		{...props}
 	>
 		<Avatar size='small'>
-			<img src="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg" alt="" />
+			<img src="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg" alt={user} />
 		</Avatar>
 		<div className={styles.message} data-user>{children}</div>
 	</div>;

@@ -14,8 +14,36 @@ import { ReactComponent as IconPlus } from '../../assets/ico/plus.svg';
 import { useState } from 'react';
 export const Chat = () => {
 	const [plusBtn, setPlusBtn] = useState<boolean>(false);
+	const [message, setMessage] = useState([
+		{ user: 'Kraiviks', message: 'dasdsd13232132' },
+		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
+		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
+		{ user: 'Kraiviks', message: 'dasdsd13232132' },
+		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
+		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
+		{ user: 'Kraiviks', message: 'dasdsd13232132' },
+		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
+		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
+		{ user: 'Kraiviks', message: 'dasdsd13232132' },
+		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
+		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
+		{ user: 'Kraiviks', message: 'dasdsd13232132' },
+		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
+		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
+		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
+	]);
+
 	return <main>
-		<section className='chats'>
+		<section className={styles.chats}>
 			<ChatItem name='Kraiviks' time='5 min ago' avatar="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg">asdsdasdas</ChatItem>
 			<ChatItem name='Kraiviks' time='5 min ago' avatar="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg">asdsdasdas</ChatItem>
 			<ChatItem name='Kraiviks' time='5 min ago' avatar="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg">asdsdasdas</ChatItem>
@@ -40,10 +68,9 @@ export const Chat = () => {
 				</div>
 			</div>
 			<div className={styles.messages}>
-				<Message>dasdasdsd</Message>
-				<Message className={styles.user_m}>dasdasdsd</Message>
-				<Message>dasdasdsd</Message>
-				<Message className={styles.user_m}>dasdasdsd</Message>
+				{message.map(item => {
+					return <Message user={item.user} className={styles.user_m}>{item.message}</Message>
+				})}
 
 			</div>
 			<div className={styles.message_form}>

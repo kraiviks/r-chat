@@ -11,36 +11,23 @@ import { ReactComponent as IconFile } from '../../assets/ico/file.svg';
 import { ReactComponent as IconFilm } from '../../assets/ico/film.svg';
 import { ReactComponent as IconImage } from '../../assets/ico/image.svg';
 import { ReactComponent as IconPlus } from '../../assets/ico/plus.svg';
-import { useState } from 'react';
+import { ReactChild, ReactFragment, ReactPortal, useEffect, useState } from 'react';
+
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+
+
+
 export const Chat = () => {
+	const db = getFirestore();
 	const [plusBtn, setPlusBtn] = useState<boolean>(false);
-	const [message, setMessage] = useState([
-		{ user: 'Kraiviks', message: 'dasdsd13232132' },
-		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
-		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
-		{ user: 'Kraiviks', message: 'dasdsd13232132' },
-		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
-		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
-		{ user: 'Kraiviks', message: 'dasdsd13232132' },
-		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
-		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
-		{ user: 'Kraiviks', message: 'dasdsd13232132' },
-		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
-		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
-		{ user: 'Kraiviks', message: 'dasdsd13232132' },
-		{ user: 'Vileks', message: 'dasd111111sd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'daaasdadsadasdasdsd13232132' },
-		{ user: 'Vileks', message: 'dczxcczczcczcasdsd13232132', localUser: 'true' },
-		{ user: 'Kraiviks', message: 'dbbbbbbbbbbbbbbfdbdbdfasdsd13232132' },
-	]);
+	const [messages, setMessages] = useState<any>();
+
+	useEffect(() => {
+		if (db) {
+			const querySnapshot = getDocs(collection(db, 'messages'));
+			setMessages(querySnapshot);
+		}
+	}, [db])
 
 	return <main>
 		<section className={styles.chats}>
@@ -68,9 +55,9 @@ export const Chat = () => {
 				</div>
 			</div>
 			<div className={styles.messages}>
-				{message.map(item => {
+				{messages ? messages.map((item: { user: string; message: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
 					return <Message user={item.user} className={styles.user_m}>{item.message}</Message>
-				})}
+				}) : null}
 
 			</div>
 			<div className={styles.message_form}>

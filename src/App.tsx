@@ -85,7 +85,7 @@ function App() {
 						<NavLink to='/chat'>
 							<IconChat />chat
 						</NavLink>
-						<NavLink to='/contact'>
+						{/* <NavLink to='/contact'>
 							<IconContact />contact
 						</NavLink>
 						<NavLink to='/notifications'>
@@ -96,7 +96,7 @@ function App() {
 						</NavLink>
 						<NavLink to='/settings'>
 							<IconSettings />settings
-						</NavLink>
+						</NavLink> */}
 					</div>
 					{user ?
 						<div className="logout" onClick={GsignOut}>
@@ -113,10 +113,10 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/chat" element={<Chat />} />
-				<Route path="/contact" element={<Contact />} />
+				{/* <Route path="/contact" element={<Contact />} />
 				<Route path="/notifications" element={<Notifications />} />
 				<Route path="/calendar" element={<Calendar />} />
-				<Route path="/settings" element={<Settings />} />
+				<Route path="/settings" element={<Settings />} /> */}
 				<Route path="*" element={<div>Not found</div>} />
 			</Routes>
 		</div>

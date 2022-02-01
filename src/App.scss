@@ -75,7 +75,8 @@ a {
 				}
 			}
 		}
-		.logout, .login {
+		.logout,
+		.login {
 			display: flex;
 			align-items: center;
 			margin-bottom: 40px;
@@ -85,6 +86,9 @@ a {
 			line-height: 19px;
 			color: $color-gray;
 			transition: all 0.5s;
+			span {
+				width: 110px;
+			}
 			svg {
 				margin-right: 18px;
 				transition: all 0.5s;

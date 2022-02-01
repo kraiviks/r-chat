@@ -16,9 +16,15 @@ import { Contact } from './components/Contact/Contact';
 import { Settings } from './components/Settings/Settings';
 import { Notifications } from './components/Notifications/Notifications';
 import { Home } from './components/Home/Home';
-import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, signOut, reauthenticateWithCredential } from "firebase/auth";
+
+
+
 function App() {
 	const provider = new GoogleAuthProvider();
+	provider.setCustomParameters({
+		prompt: 'select_account'
+	});
 	const auth = getAuth();
 	const [user, setUser] = useState<any>();
 
@@ -35,17 +41,19 @@ function App() {
 				// ...
 			}
 		});
-		console.log(user);
 	})
 	const signInWithGoogle = async () => {
 
-		await signInWithPopup(auth, provider)
-			.then((result) => {
+		if (!user) {
+			await signInWithPopup(auth, provider)
+				.then((result) => {
 
-			}).catch((error) => {
-				console.log(error);
-			});
-		console.log(user);
+				}).catch((error) => {
+					console.log(error);
+				});
+
+
+		}
 	}
 
 	const GsignOut = () => {
@@ -67,9 +75,6 @@ function App() {
 						<h2 className='user-title'>
 							{user ? user.displayName : null}
 						</h2>
-						<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M4.75 7.125L9.5 11.875L14.25 7.125" stroke="#0D1C2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
 					</div>
 				</div>
 				<div className="nav">
@@ -99,7 +104,7 @@ function App() {
 						</div>
 						:
 						<div className="login" onClick={() => signInWithGoogle()}>
-							<IconLogin />log in
+							<IconLogin /><span>log in</span>
 						</div>
 					}
 				</div>
@@ -119,3 +124,4 @@ function App() {
 }
 
 export default App;
+

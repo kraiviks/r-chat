@@ -9,7 +9,6 @@ export const UserInfo = ({ avatar, name, username }: UserInfoProps) => {
 		</Avatar>
 		<div className={styles.info}>
 			<div className={styles.userName}>{username}</div>
-			<div className={styles.lastOnline}>last online 5 minutes ago</div>
 		</div>
 
 	</div>

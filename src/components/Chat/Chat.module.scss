@@ -1,20 +1,15 @@
 @import "../../variables.scss";
 main {
+	width: 100%;
 	display: flex;
+	justify-content: center;
 	padding: 110px 64px 0;
-}
-
-.chats {
-	padding: 5px 15px 5px 5px;
-	overflow-y: auto;
 }
 
 .messages_box {
 	background-color: $color-white;
-	width: 800px;
-	margin-left: 64px;
 	margin-bottom: 40px;
-
+	width: 100%;
 	.user_info {
 		display: flex;
 		justify-content: space-between;
@@ -90,12 +85,11 @@ main {
 }
 
 .btn_box {
+	position: relative;
 	visibility: hidden;
-	position: absolute;
-	top: -170%;
-	left: -3%;
 	transition: all 0.5s;
 	opacity: 0;
+	top: -100%;
 	button {
 		margin: 5px 0;
 	}
@@ -104,7 +98,8 @@ main {
 .btn_box_active {
 	opacity: 1;
 	visibility: visible;
-	top: -270%;
+	top: -180%;
+	left: 0%;
 }
 
 .btn_size_40 {

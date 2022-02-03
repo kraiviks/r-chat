@@ -1,5 +1,6 @@
 import { Avatar } from './components';
-import './App.scss';
+import styles from './App.module.scss';
+import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import { ReactComponent as IconChat } from './assets/ico/chat.svg';
@@ -10,6 +11,8 @@ import { ReactComponent as IconLogout } from './assets/ico/logout.svg';
 import { ReactComponent as IconNotifications } from './assets/ico/notification.svg';
 import { ReactComponent as IconSettings } from './assets/ico/settings.svg';
 import { ReactComponent as IconLogin } from './assets/ico/login.svg';
+import { ReactComponent as IconMenu } from './assets/ico/menu.svg';
+
 import { Chat } from './components/Chat/Chat';
 import { Calendar } from './components/Calendar/Calendar';
 import { Contact } from './components/Contact/Contact';
@@ -64,21 +67,31 @@ function App() {
 			// An error happened.
 		});
 	}
+
+	const [menuAside, setMenuAside] = useState<boolean>(false);
+
+	const toggleAside = () => {
+		if (menuAside) {
+			setMenuAside(!menuAside)
+		}
+	}
 	return (
-		<div className="App">
-			<aside className="aside">
-				<div className="user">
+		<div className={styles.App}>
+			<aside className={cn(styles.aside, {
+				[styles.active_aside]: menuAside
+			})}>
+				<div className={styles.user}>
 					<Avatar size='large' shadow>
-						<img src="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg" alt="" />
+						<img src={user ? user.photoURL : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'} alt={user ? user.displayName : 'guest'} />
 					</Avatar>
-					<div className="account-box">
-						<h2 className='user-title'>
-							{user ? user.displayName : null}
+					<div className={styles.account_box}>
+						<h2 className={styles.user_title}>
+							{user ? user.displayName : 'Guest'}
 						</h2>
 					</div>
 				</div>
-				<div className="nav">
-					<div className="nav-list">
+				<div className={styles.nav}>
+					<div className={styles.nav_list}>
 						<NavLink to='/'>
 							<IconGrid />home
 						</NavLink>
@@ -99,27 +112,31 @@ function App() {
 						</NavLink> */}
 					</div>
 					{user ?
-						<div className="logout" onClick={GsignOut}>
-							<IconLogout />log out
+						<div className={styles.logout} onClick={GsignOut}>
+							<IconLogout /><span>log out</span>
 						</div>
 						:
-						<div className="login" onClick={() => signInWithGoogle()}>
+						<div className={styles.login} onClick={() => signInWithGoogle()}>
 							<IconLogin /><span>log in</span>
 						</div>
 					}
 				</div>
 
 			</aside>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/chat" element={<Chat />} />
-				{/* <Route path="/contact" element={<Contact />} />
+			<main onClick={toggleAside}>
+				<div className={styles.mobile_button} onClick={() => setMenuAside(!menuAside)
+				}><IconMenu /></div>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/chat" element={<Chat />} />
+					{/* <Route path="/contact" element={<Contact />} />
 				<Route path="/notifications" element={<Notifications />} />
 				<Route path="/calendar" element={<Calendar />} />
 				<Route path="/settings" element={<Settings />} /> */}
-				<Route path="*" element={<div>Not found</div>} />
-			</Routes>
-		</div>
+					<Route path="*" element={<div>Not found</div>} />
+				</Routes>
+			</main >
+		</div >
 	);
 }
 

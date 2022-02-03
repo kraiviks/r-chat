@@ -82,7 +82,6 @@ export const Chat = () => {
 			uid: guest.uid,
 			text: newMessage,
 			createAt: new Date,
-
 		});
 		setNewMessage(e.target.value = " ");
 	}
@@ -95,39 +94,28 @@ export const Chat = () => {
 		scrollTarget.current.scrollIntoView({ behavior: 'smooth' });
 	}, [messages])
 
-	return <main>
-
-		<section className={styles.messages_box}>
-			<div className={styles.user_info}>
-				<UserInfo name='Kraiviks' username='Kraivkis' avatar="https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg" />
-				<div className={styles.user_info_btn}>
-					<Button circle shadow>
-						<IconMore />
-					</Button>
-				</div>
+	return <section className={styles.messages_box}>
+		<div className={styles.user_info}>
+			<UserInfo name={user ? user.displayName : 'Guest'} username={user ? user.displayName : 'Guest'} avatar={user ? user.photoURL : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'} />
+			<div className={styles.user_info_btn}>
+				<Button circle shadow>
+					<IconMore />
+				</Button>
 			</div>
-			<div className={styles.messages}>
-				{messages ? messages.map((item: any) => {
-					return <Message user={item.username} className={user && item.uid === user.uid || item.uid === guest.uid ? styles.user_m : ''} key={item.id}>{item.text}</Message>
-				}) : null}
-				<div ref={scrollTarget} ></div>
-			</div>
-			<div className={styles.message_form}>
-				<div className={cn(styles.btn_box, {
-					[styles.btn_box_active]: plusBtn
-				})}>
-					<Button className={styles.btn_size_40} circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)'><IconFilm /></Button>
-					<Button className={styles.btn_size_40} circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)'><IconImage /></Button>
-					<Button className={styles.btn_size_40} circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)'><IconFile /></Button>
-				</div>
-				<Button className={styles.btn_size_40} circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)' onClick={() => setPlusBtn(!plusBtn)}><IconPlus /></Button>
-				<form action="" className={styles.form} >
-					<input type="text" name="input-message" id="input-message" size={60} placeholder='Type a message here' value={newMessage || ''} onChange={inputMessage} />
-					<Button className={styles.btn_size_40} type='submit' circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)' onClick={user ? pushMessage : pushMessageGuest}><IconSend /></Button>
-				</form>
-			</div>
-		</section>
-	</main>;
+		</div>
+		<div className={styles.messages}>
+			{messages ? messages.map((item: any) => {
+				return <Message photo={user && item.uid === user.uid ? user.photoURL : null} user={item.username} className={user && item.uid === user.uid || item.uid === guest.uid ? styles.user_m : ''} key={item.id}>{item.text}</Message>
+			}) : null}
+			<div ref={scrollTarget} ></div>
+		</div>
+		<div className={styles.message_form}>
+			<form action="" className={styles.form} >
+				<input type="text" name="input-message" id="input-message" placeholder='Type a message here' value={newMessage || ''} onChange={inputMessage} />
+				<Button className={styles.btn_size_35} type='submit' circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)' onClick={user ? pushMessage : pushMessageGuest}><IconSend /></Button>
+			</form>
+		</div>
+	</section>;
 };
 
 

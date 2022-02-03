@@ -65,25 +65,29 @@ export const Chat = () => {
 
 	const pushMessage = async (e: any) => {
 		e.preventDefault();
-		await addDoc(collection(db, "messages"), {
-			username: user.displayName,
-			uid: user.uid,
-			text: newMessage,
-			createAt: new Date,
+		if (newMessage !== '') {
+			await addDoc(collection(db, "messages"), {
+				username: user.displayName,
+				uid: user.uid,
+				text: newMessage,
+				createAt: new Date,
 
-		});
-		setNewMessage(e.target.value = " ");
+			});
+			setNewMessage(e.target.value = "");
+		}
 	}
 
 	const pushMessageGuest = async (e: any) => {
 		e.preventDefault();
-		await addDoc(collection(db, "messages"), {
-			username: guest.displayName,
-			uid: guest.uid,
-			text: newMessage,
-			createAt: new Date,
-		});
-		setNewMessage(e.target.value = " ");
+		if (newMessage !== '') {
+			await addDoc(collection(db, "messages"), {
+				username: guest.displayName,
+				uid: guest.uid,
+				text: newMessage,
+				createAt: new Date,
+			});
+			setNewMessage(e.target.value = "");
+		}
 	}
 
 

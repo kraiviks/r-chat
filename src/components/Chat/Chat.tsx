@@ -1,15 +1,8 @@
 import { Button } from '..';
 import { UserInfo } from '../UserInfo/UserInfo';
 import styles from './Chat.module.scss';
-import cn from 'classnames';
 import { Message } from './Message/Message';
-import { ReactComponent as IconMore } from '../../assets/ico/more-vertical.svg';
-import { ReactComponent as IconLink } from '../../assets/ico/link.svg';
 import { ReactComponent as IconSend } from '../../assets/ico/send.svg';
-import { ReactComponent as IconFile } from '../../assets/ico/file.svg';
-import { ReactComponent as IconFilm } from '../../assets/ico/film.svg';
-import { ReactComponent as IconImage } from '../../assets/ico/image.svg';
-import { ReactComponent as IconPlus } from '../../assets/ico/plus.svg';
 import { useEffect, useState, useRef } from 'react';
 
 import { getFirestore, collection, addDoc, query, onSnapshot, orderBy } from "firebase/firestore";
@@ -40,7 +33,6 @@ export const Chat = () => {
 		});
 	})
 	const db = getFirestore();
-	const [plusBtn, setPlusBtn] = useState<boolean>(false);
 	const [messages, setMessages] = useState<any[]>();
 	const [newMessage, setNewMessage] = useState<string>();
 

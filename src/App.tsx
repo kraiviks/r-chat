@@ -63,6 +63,7 @@ function App() {
 		signOut(auth).then(() => {
 			// Sign-out successful.
 			setUser(false)
+			window.location.reload();
 		}).catch((error) => {
 			// An error happened.
 		});
@@ -75,6 +76,7 @@ function App() {
 			setMenuAside(!menuAside)
 		}
 	}
+
 	return (
 		<div className={styles.App}>
 			<aside className={cn(styles.aside, {

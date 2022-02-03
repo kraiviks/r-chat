@@ -96,20 +96,16 @@ export const Chat = () => {
 
 	useEffect(() => {
 		scrollTarget.current.scrollIntoView({ behavior: 'smooth' });
-	}, [messages])
+	}, [messages, pushMessage,
+		pushMessageGuest])
 
 	return <section className={styles.messages_box}>
 		<div className={styles.user_info}>
 			<UserInfo name={user ? user.displayName : 'Guest'} username={user ? user.displayName : 'Guest'} avatar={user ? user.photoURL : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'} />
-			<div className={styles.user_info_btn}>
-				<Button circle shadow>
-					<IconMore />
-				</Button>
-			</div>
 		</div>
 		<div className={styles.messages}>
 			{messages ? messages.map((item: any) => {
-				return <Message photo={user && item.uid === user.uid ? user.photoURL : null} user={item.username} className={user && item.uid === user.uid || item.uid === guest.uid ? styles.user_m : ''} key={item.id}>{item.text}</Message>
+				return <Message photo={user && item.uid === user.uid ? user.photoURL : null} user={item.username} className={(user && item.uid === user.uid && item.uid !== guest.uid) || (!user && item.uid === guest.uid) ? styles.user_m : ''} key={item.id}>{item.text}</Message>
 			}) : null}
 			<div ref={scrollTarget} ></div>
 		</div>

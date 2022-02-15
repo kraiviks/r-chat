@@ -3,14 +3,19 @@ import { UserInfo } from '../UserInfo/UserInfo';
 import styles from './Chat.module.scss';
 import { Message } from './Message/Message';
 import { ReactComponent as IconSend } from '../../assets/ico/send.svg';
+import { ReactComponent as IconSmile } from '../../assets/ico/smile.svg';
+import cn from 'classnames';
 import { useEffect, useState, useRef } from 'react';
 
 import { getFirestore, collection, addDoc, query, onSnapshot, orderBy } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
+import Picker from 'emoji-picker-react';
 
 
 export const Chat = () => {
+
+
 	const auth = getAuth();
 	const [user, setUser] = useState<any>();
 	const [guest, setGuest] = useState<any>({
@@ -34,7 +39,23 @@ export const Chat = () => {
 	})
 	const db = getFirestore();
 	const [messages, setMessages] = useState<any[]>();
-	const [newMessage, setNewMessage] = useState<string>();
+	const [newMessage, setNewMessage] = useState<string>('');
+	const [showEmoji, setShowEmoji] = useState<boolean>(false);
+	//emoji - start
+
+	const handleEmoji = () => {
+		setShowEmoji(showEmoji => !showEmoji);
+	}
+
+	const onEmojiClick = (event: any, emojiObject: any) => {
+
+		setNewMessage(newMessage => newMessage + emojiObject.emoji)
+		setShowEmoji(showEmoji => !showEmoji);
+
+	};
+
+
+	//emoji - end
 
 	useEffect(() => {
 		if (db) {
@@ -104,10 +125,19 @@ export const Chat = () => {
 		<div className={styles.message_form}>
 			<form action="" className={styles.form} >
 				<input type="text" name="input-message" id="input-message" placeholder='Type a message here' value={newMessage || ''} onChange={inputMessage} />
+				{showEmoji ?
+					<span className={styles.emoji}>
+						<Picker onEmojiClick={onEmojiClick} />
+					</span> :
+					null
+				}
+				<div className={cn(styles.btn_smile, {
+					[styles.active]: showEmoji
+				})} onClick={handleEmoji}><IconSmile /></div>
 				<Button className={styles.btn_size_35} type='submit' circle bg='linear-gradient(90.54deg, #60a9f6 0%, #2a8bf2 100%)' onClick={user ? pushMessage : pushMessageGuest}><IconSend /></Button>
 			</form>
-		</div>
-	</section>;
+		</div >
+	</section >;
 };
 
 

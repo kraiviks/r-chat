@@ -35,7 +35,7 @@
 		align-items: center;
 		justify-content: center;
 		margin-top: 10px;
-		button {
+		button.btn_size_35 {
 			margin-left: 10px;
 			svg {
 				transform: scale(3) rotate(-45deg);
@@ -46,6 +46,7 @@
 			align-items: center;
 			width: 100%;
 			padding: 0 50px;
+			position: relative;
 			input {
 				width: 100%;
 				border: none;
@@ -90,4 +91,27 @@
 .btn_size_35 {
 	width: 35px;
 	height: 35px;
+}
+
+.emoji {
+	position: absolute;
+	right: 100px;
+	bottom: 50px;
+}
+.btn_smile {
+	position: absolute;
+	right: 110px;
+	cursor: pointer;
+	svg {
+		width: 35px;
+		height: 35px;
+	}
+}
+
+.active {
+	transition: 1s;
+	transform: scale(1.2);
+	svg {
+		fill: #2a8bf2;
+	}
 }
